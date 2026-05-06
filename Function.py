@@ -1,4 +1,5 @@
 from pathlib import Path
+import csv
 
 def check_data():
     filepath = Path(r'Data')
@@ -7,3 +8,12 @@ def check_data():
         if file.is_file():
             datas.append(file.name)
     return datas
+
+def get_data(filepath):
+    with open(Path('Data', filepath),  newline="", encoding="utf-8-sig") as the_file:
+        reader = csv.reader(the_file, delimiter=";")
+        data = list(reader)
+
+        # headings = data[0]
+        # rows = data[1:]
+    return data
