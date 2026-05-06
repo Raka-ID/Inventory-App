@@ -1,33 +1,62 @@
 import FreeSimpleGUI as sg
+import Function as fc
 
 # Pass Menu
 pass_lable = sg.Text('Enter the password: ')
 inp_pass = sg.Input(password_char="*", key="pass")
 pass_button = sg.Button('Enter', key='pass_button')
-exit_app = sg.Button('Exit', key='exit_app')
+exit_app1 = sg.Button('Exit', key='exit_app')
 
-password = 'Inventory001' # Initial Password
-pass_layout = [[pass_lable], [inp_pass], [[pass_button, exit_app]]]
-pass_menu = sg.Window("Login Section", layout=pass_layout)
+password = 'aaa' # Initial Password
+login_layout = [[pass_lable], [inp_pass], [[pass_button, exit_app1]]]
+login_menu = sg.Window("Login Section", layout=login_layout)
 
 # Main Menu
+file_lists = fc.check_data()
+list_box = sg.Listbox(values=file_lists, key='selected_file', enable_events=True, size=(50, 10))
+sel_file_button = sg.Button('Select', key='sel_file')
+chg_pass_button = sg.Button('Change Password', key='chg_pass')
+exit_app2 = sg.Button('Exit', key='exit_app2')
 
+mm_layout = [
+    [sg.Text('Select Data')],
+    [
+        list_box,
+        sg.Column([
+            [sel_file_button],
+            [chg_pass_button],
+            [exit_app2]
+        ])
+    ]
+]
+main_menu = sg.Window('Main Menu', layout=mm_layout, resizable=True)
 
 #=======================================================================================================================
 # The Main Code
 
 # Password Checker
 while True:
-    event_pass, values_pass = pass_menu.read()
-    print(f'{event_pass}, and {values_pass}')
+    event_pass, values_pass = login_menu.read()
+    print(f'{event_pass}, and {values_pass}') # Delete this when finished
     match event_pass:
         case 'exit_app':
-            sg.popup_timed('Bye!', auto_close_duration = 1)
+            sg.popup_timed('Bye!', auto_close_duration = 0.3)
             break
 
     if values_pass['pass'] == password:
         # Main Menu
-
+        login_menu.close()
+        while True:
+            event_mm, values_mm = main_menu.read()
+            print(f'{event_mm}, and {values_mm}')
+            match event_mm:
+                case 'sel_file':
+                    continue
+                case 'chg_pass':
+                    continue
+                case 'exit_app2':
+                    sg.popup_timed('Bye!', auto_close_duration=0.3)
+                    exit()
 
     else:
         sg.popup_error('Password is incorrect!')
