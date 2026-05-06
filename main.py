@@ -6,13 +6,15 @@ inp_pass = sg.Input(password_char="*", key="pass")
 pass_button = sg.Button('Enter', key='pass_button')
 exit_app = sg.Button('Exit', key='exit_app')
 
+password = 'Inventory001' # Initial Password
 pass_layout = [[pass_lable], [inp_pass], [[pass_button, exit_app]]]
-
-#Initial Password
-password = 'Inventory001'
-
-# Password Menu
 pass_menu = sg.Window("Login Section", layout=pass_layout)
+
+# Main Menu
+
+
+#=======================================================================================================================
+# The Main Code
 
 # Password Checker
 while True:
@@ -20,12 +22,15 @@ while True:
     print(f'{event_pass}, and {values_pass}')
     match event_pass:
         case 'exit_app':
-            sg.popup_timed('Bye!', )
+            sg.popup_timed('Bye!', auto_close_duration = 1)
             break
+
     if values_pass['pass'] == password:
-        print('Password match!')
+        # Main Menu
+
+
     else:
-        sg.popup_ok('Password is incorrect!')
+        sg.popup_error('Password is incorrect!')
 
 
 # File Opener
