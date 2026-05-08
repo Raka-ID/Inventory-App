@@ -13,7 +13,4 @@ def get_data(filepath):
     with open(Path('Data', filepath),  newline="", encoding="utf-8-sig") as the_file:
         reader = csv.reader(the_file, delimiter=";")
         data = list(reader)
-
-        # headings = data[0]
-        # rows = data[1:]
     return data
