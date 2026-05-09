@@ -126,4 +126,3 @@ while values_login['pass'] == password and event_login != 'exit_app':
             continue
         case 'exit':
             continue
-    #
