@@ -1,31 +1,40 @@
-﻿No;Brand;Type;Year of Production;Price (IDR-Million)
-1;Toyota;Corolla;2020;450
-2;Honda;Civic;2019;480
-3;Ford;Ranger;2021;520
-4;BMW;320i;2018;700
-5;Mercedes-Benz;C-Class;2022;950
-6;Tesla;Model 3;2021;1100
-7;Volkswagen;Golf;2017;400
-8;Mitsubishi;Pajero Sport;2020;600
-9;Toyota;Camry;2021;800
-10;Honda;CR-V;2022;550
-11;Ford;Mustang;2019;1300
-12;BMW;X5;2023;1400
-13;Mercedes-Benz;E-Class;2020;1200
-14;Tesla;Model S;2018;1500
-15;Volkswagen;Tiguan;2021;650
-16;Mitsubishi;Xpander;2019;300
-17;Toyota;Fortuner;2022;650
-18;Honda;HR-V;2021;375
-19;Ford;Everest;2023;700
-20;BMW;530i;2020;1100
-21;Mercedes-Benz;GLC;2021;1000
-22;Tesla;Model Y;2022;1200
-23;Volkswagen;Passat;2018;600
-24;Mitsubishi;Outlander;2021;550
-25;Toyota;Yaris;2017;280
-26;Honda;Accord;2020;750
-27;Ford;Focus;2018;400
-28;BMW;i4;2023;1300
-29;Mercedes-Benz;A-Class;2019;700
-30;Tesla;Model X;2022;1600
+Brand;Type;Condition;Year of Production;Price (IDR-Million)
+Toyota;Corolla;New;2020;450
+Honda;Civic;New;2019;480
+Ford;Ranger;New;2021;520
+BMW;320i;New;2018;700
+Mercedes-Benz;C-Class;New;2022;950
+Tesla;Model 3;New;2021;1100
+Volkswagen;Golf;New;2017;400
+Mitsubishi;Pajero Sport;New;2020;600
+Toyota;Camry;New;2021;800
+Honda;CR-V;Secondhand;2022;550
+Ford;Mustang;New;2019;1300
+BMW;X5;New;2023;1400
+Mercedes-Benz;E-Class;New;2020;1200
+Tesla;Model S;New;2018;1500
+Volkswagen;Tiguan;Secondhand;2021;650
+Mitsubishi;Xpander;New;2019;300
+Toyota;Fortuner;New;2022;650
+Honda;HR-V;New;2021;375
+Ford;Everest;New;2023;700
+BMW;530i;Secondhand;2020;1100
+Mercedes-Benz;GLC;New;2021;1000
+Tesla;Model Y;New;2022;1200
+Volkswagen;Passat;New;2018;600
+Mitsubishi;Outlander;New;2021;550
+Toyota;Yaris;New;2017;280
+Honda;Accord;Secondhand;2020;750
+Ford;Focus;New;2018;400
+BMW;i4;New;2023;1300
+Mercedes-Benz;A-Class;Secondhand;2019;700
+Tesla;Model X;New;2022;1600
+Toyota;Avanza;Secondhand;2020;300
+aaa;sss;ddd;www;qqq
+aaa;sss;www;qqq;aaa
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;

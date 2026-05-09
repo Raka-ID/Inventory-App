@@ -1,5 +1,6 @@
 import FreeSimpleGUI as sg
 import Function as fc
+import csv
 
 # Login Menu UI component
 pass_label   = sg.Text('Enter the password: ')
@@ -10,7 +11,7 @@ password     = 'aaa' # Initial Password
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Main Menu UI component
-file_lists      = fc.check_data()
+file_lists      = fc.check_data_list()
 list_box        = sg.Listbox(values=file_lists, key='sel_file', enable_events=True, size=(50, 10))
 sel_file_button = sg.Button('Select Data', key='sel_button')
 chg_pass_button = sg.Button('Change Password', key='chg_pass')
@@ -18,13 +19,15 @@ exit_app2       = sg.Button('Exit', key='exit_app2')
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Inventory-App UI component
-buttons = [[sg.Button(texts, key=keys, font=('Helvetica', 12), size=(10, 1))] for texts, keys in [('Add',     'add'),
-                                                                                                  ('Edit',    'edit'),
-                                                                                                  ('Complete','comp'),
-                                                                                                  ('Delete',  'delete'),
-                                                                                                  ('Back',    'back'),
-                                                                                                  ('Exit',    'exit')]
-          ] # List Comprehension
+buttons = [
+    [sg.Button(texts, key=keys, font=('Helvetica', 12), size=(10, 1), tooltip=tt)] for texts, keys, tt in
+        [('Add',      'add',    'Add new data'),
+         ('Edit',     'edit',   'Please click the cell you want to edit'),
+         ('Complete', 'comp',   'Store and Delete Data From Table'),
+         ('Delete',   'delete', 'Delete data permanently'),
+         ('Back',     'back',   'Back to main menu'),
+         ('Exit',     'exit',   'Exit application')]
+] # List Comprehension
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Layouts
@@ -50,7 +53,7 @@ layouts         = [[
 
 # GUI Windows
 login_menu = sg.Window("Login Section", layout=login_layout)
-main_menu  = sg.Window('Main Menu', layout=layouts, resizable=True)
+main_menu  = sg.Window('Inventory App', layout=layouts, resizable=True)
 
 #=======================================================================================================================
 # THE MAIN CODE
@@ -85,10 +88,12 @@ while values_login['pass'] == password and event_login != 'exit_app':
 
         case 'sel_button':
             try:
-                data = fc.get_data(values['sel_file'][0])
+                data = fc.get_data(values['sel_file'][0]) # What if the data is nott csv
+                heading = data[0]
                 table = sg.Table(values=data[1:],
-                                 headings=data[0],
+                                 headings=heading,
                                  enable_click_events=True,
+                                 num_rows=15,
                                  font=('Helvetica', 12),
                                  key='nt')
                 main_menu['mm_lay'].update(visible=False)
@@ -99,19 +104,26 @@ while values_login['pass'] == password and event_login != 'exit_app':
                                                   font=('Helvetica', 15),
                                                   expand_x=True,
                                                   justification='center')],
-                                         [table]
+                                         [sg.Input(expand_x=True, key='new_input')],
+                                         [table, sg.Column(buttons)]
                                         ]
                                        )
-                match event:
-                    case 'add':
-                        print(event, values)
-                    case 'edit':
-                        continue
-                    case 'comp':
-                        continue
-                    case 'delete':
-                        continue
-                    case 'exit':
-                        continue
             except IndexError:
                 sg.popup('Select data first!')
+
+        case 'add':
+            if values['sel_file'][0].endswith(".csv"):
+                user_add_input = fc.add_data_csv(heading=heading, filepath=values['sel_file'][0])
+                main_menu['nt'].update(values=user_add_input)
+            else:
+                user_add_input = fc.add_data_other(filepath=values['sel_file'][0])
+                main_menu['nt'].update(values=user_add_input)
+        case 'edit':
+            continue
+        case 'comp':
+            continue
+        case 'delete':
+            continue
+        case 'exit':
+            continue
+    #
