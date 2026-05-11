@@ -28,7 +28,7 @@ def add_data_csv(heading, filepath):
             case 'submit':
                 conf_data = []
                 for j in heading:
-                    conf_data.append([sg.Text(f"{j}: {add_values[j]}", font=('Helvetica', 12))])
+                    conf_data.append([sg.Text(f"{j}\t: {add_values[j]}", font=('Helvetica', 12))])
                 conf_layout = [
                                conf_data,
                                [sg.Button('Yes', key='yes'), sg.Button('No', key='no')]
@@ -66,15 +66,15 @@ def add_data_other(filepath):
     match add_event:
         case 'submit':
             with open(Path('Data', filepath), 'a', newline="", encoding="utf-8-sig") as the_file:
-                the_file.write(window['new_data'] + '\n')
+                the_file.write(f'\n{values["new_data"]}')
+            window.close()
         case 'cancel' | sg.WIN_CLOSED:
             window.close()
     return get_data(filepath)[1:]
 
-
-# headinga = ['satu', 'dua', 'tiga']
+# heading = ['satu', 'dua', 'tiga']
 #
-# print(add_data_csv(headinga))
+# print(add_data_csv(heading))
 
 def del_data_csv(filepath, del_row):
     with open(Path('Data', filepath), 'r', newline="", encoding="utf-8-sig") as the_file:
@@ -84,8 +84,8 @@ def del_data_csv(filepath, del_row):
 
     while True:
         layout = [
-            [sg.Text('Are you sure you want to delete this data?')],
-            [sg.Column([[sg.Text(f'{i}\t: {j}')] for i, j in zip(heading, del_data)])],
+            [sg.Text('Are you sure you want to delete this data?', font=('Helvetica', 14))],
+            [sg.Column([[sg.Text(f'{i}\t: {j}', font=('Helvetica', 12))] for i, j in zip(heading, del_data)])],
             [sg.Button('Yes', key='Yes'), sg.Button('Cancel', key='Cancel')]
         ]
         window = sg.Window('Data Deletion Confirmation', layout=layout)
