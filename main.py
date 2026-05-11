@@ -75,7 +75,7 @@ login_menu.close()
 while values_login['pass'] == password and event_login != 'exit_app':
     event, values = main_menu.read()
     print(f'{event}, and {values}') # Delete this after Finished
-    event_slicing = event[1]
+    # event_slicing = event[1]
 
     match event:
         # Change Password Menu
@@ -125,7 +125,7 @@ while values_login['pass'] == password and event_login != 'exit_app':
             continue
         case 'delete':
             try:
-                print(values['nt'][0])
+                # print(values['nt'][0])  # Delete this if you have finished
                 if values['sel_file'][0].endswith(".csv"):
                     user_del = fc.del_data_csv(filepath=values['sel_file'][0], del_row=values['nt'][0])
                     main_menu['nt'].update(values=user_del)

@@ -79,9 +79,25 @@ def add_data_other(filepath):
 def del_data_csv(filepath, del_row):
     with open(Path('Data', filepath), 'r', newline="", encoding="utf-8-sig") as the_file:
         data = the_file.readlines()
-        print(data)
-        print(len(data))
-    del data[del_row+1]
-    with open(Path('Data', filepath), 'w', newline="", encoding="utf-8-sig") as the_file:
-        the_file.writelines(data)
+        heading = data[0].strip().split(';')
+        del_data = data[del_row+1].strip().split(';')
+
+    while True:
+        layout = [
+            [sg.Text('Are you sure you want to delete this data?')],
+            [sg.Column([[sg.Text(f'{i}\t: {j}')] for i, j in zip(heading, del_data)])],
+            [sg.Button('Yes', key='Yes'), sg.Button('Cancel', key='Cancel')]
+        ]
+        window = sg.Window('Data Deletion Confirmation', layout=layout)
+        event, values = window.read()
+        match event:
+            case 'Yes':
+                del data[del_row+1]
+                with open(Path('Data', filepath), 'w', newline="", encoding="utf-8-sig") as the_file:
+                    the_file.writelines(data)
+                window.close()
+                break
+            case 'Cancel' | sg.WIN_CLOSED:
+                window.close()
+                break
     return get_data(filepath)[1:]
