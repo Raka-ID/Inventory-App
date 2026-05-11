@@ -24,7 +24,7 @@ buttons = [
         [('Add',      'add',    'Add new data'),
          ('Edit',     'edit',   'Please click the cell you want to edit'),
          ('Complete', 'comp',   'Store and Delete Data From Table'),
-         ('Delete',   'delete', 'Delete data permanently'),
+         ('Delete',   'delete', 'Delete data(row) permanently'),
          ('Back',     'back',   'Back to main menu'),
          ('Exit',     'exit',   'Exit application')]
 ] # List Comprehension
@@ -75,6 +75,7 @@ login_menu.close()
 while values_login['pass'] == password and event_login != 'exit_app':
     event, values = main_menu.read()
     print(f'{event}, and {values}') # Delete this after Finished
+    event_slicing = event[1]
 
     match event:
         # Change Password Menu
@@ -92,6 +93,7 @@ while values_login['pass'] == password and event_login != 'exit_app':
                 heading = data[0]
                 table = sg.Table(values=data[1:],
                                  headings=heading,
+                                 enable_events=True,
                                  enable_click_events=True,
                                  num_rows=15,
                                  font=('Helvetica', 12),
@@ -104,7 +106,6 @@ while values_login['pass'] == password and event_login != 'exit_app':
                                                   font=('Helvetica', 15),
                                                   expand_x=True,
                                                   justification='center')],
-                                         [sg.Input(expand_x=True, key='new_input')],
                                          [table, sg.Column(buttons)]
                                         ]
                                        )
@@ -123,6 +124,13 @@ while values_login['pass'] == password and event_login != 'exit_app':
         case 'comp':
             continue
         case 'delete':
-            continue
-        case 'exit':
-            continue
+            try:
+                print(values['nt'][0])
+                if values['sel_file'][0].endswith(".csv"):
+                    user_del = fc.del_data_csv(filepath=values['sel_file'][0], del_row=values['nt'][0])
+                    main_menu['nt'].update(values=user_del)
+            except IndexError:
+                sg.popup('Select data first!')
+        case 'exit' | sg.WIN_CLOSED:
+            sg.popup_timed('Bye!', auto_close_duration=0.5)
+            exit()

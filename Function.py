@@ -37,6 +37,10 @@ def add_data_csv(heading, filepath):
                 conf_event, conf_values = confirmation.read()
                 match conf_event:
                     case 'yes':
+                        new_data = list(add_values.values())
+                        with open(Path('Data', filepath), 'a', newline="", encoding="utf-8-sig") as the_file:
+                            writer = csv.writer(the_file, delimiter=";")
+                            writer.writerow(new_data)
                         confirmation.close()
                         window.close()
                         break
@@ -47,10 +51,7 @@ def add_data_csv(heading, filepath):
             case 'cancel' | sg.WIN_CLOSED:
                 window.close()
                 break
-    new_data = list(add_values.values())
-    with open(Path('Data', filepath), 'a', newline="", encoding="utf-8-sig") as the_file:
-        writer = csv.writer(the_file, delimiter=";")
-        writer.writerow(new_data)
+    print(len(add_values.values()))
     return get_data(filepath)[1:]
 
 def add_data_other(filepath):
@@ -74,3 +75,13 @@ def add_data_other(filepath):
 # headinga = ['satu', 'dua', 'tiga']
 #
 # print(add_data_csv(headinga))
+
+def del_data_csv(filepath, del_row):
+    with open(Path('Data', filepath), 'r', newline="", encoding="utf-8-sig") as the_file:
+        data = the_file.readlines()
+        print(data)
+        print(len(data))
+    del data[del_row+1]
+    with open(Path('Data', filepath), 'w', newline="", encoding="utf-8-sig") as the_file:
+        the_file.writelines(data)
+    return get_data(filepath)[1:]

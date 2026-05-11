@@ -1,4 +1,4 @@
-Brand;Type;Condition;Year of Production;Price (IDR-Million)
+﻿Brand;Type;Condition;Year of Production;Price (IDR-Million)
 Toyota;Corolla;New;2020;450
 Honda;Civic;New;2019;480
 Ford;Ranger;New;2021;520
@@ -30,12 +30,3 @@ BMW;i4;New;2023;1300
 Mercedes-Benz;A-Class;Secondhand;2019;700
 Tesla;Model X;New;2022;1600
 Toyota;Avanza;Secondhand;2020;300
-aaa;sss;ddd;www;qqq
-aaa;sss;www;qqq;aaa
-;;;;
-;;;;
-;;;;
-;;;;
-;;;;
-;;;;
-aaa;aaa;aaa;;
